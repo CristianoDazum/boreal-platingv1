@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SupplierForm from '../../components/SupplierForm.astro';
+---
+<BaseLayout title="Suppliers | Boreal Plating" description="Boreal Plating supplier registration for raw materials, chemical supplies, machining, components, technical services and logistics." lang="en" path="/en/suppliers/">
+  <PageHero eyebrow="SUPPLIERS" title="Partnerships that strengthen our operation." description="Register your company to present products, services and supply capabilities to Boreal Plating." image="/images/materia-prima.webp" imageAlt="Materials and components used in Boreal's industrial operation" />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">BECOME A SUPPLIER</p>
+        <h2>Register your company.</h2>
+        <p>The registration gathers essential information so Boreal can learn about your company, supply category and potential partnership opportunities.</p>
+        <div class="contact-list">
+          <div class="contact-item"><span>Categories</span><p>Raw materials, chemical supplies, machining and components, technical services, logistics and other supplies.</p></div>
+          <div class="contact-item"><span>Ethics and conduct</span><p>Relationships with suppliers and partners follow Boreal's <a class="text-link" href="/documents/esg/codigo-de-etica-e-conduta.pdf" target="_blank" rel="noopener noreferrer">Code of Ethics and Conduct ↗</a> (PDF in Portuguese).</p></div>
+        </div>
+      </div>
+      <div class="reveal"><SupplierForm lang="en" /></div>
+    </div>
+  </section>
+</BaseLayout>

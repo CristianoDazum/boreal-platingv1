@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CareerForm from '../../components/CareerForm.astro';
+---
+<BaseLayout title="Careers | Boreal Plating" description="Explore benefits, professional development opportunities and submit your details to work at Boreal Plating." lang="en" path="/en/careers/">
+  <PageHero eyebrow="CAREERS" title="Work at Boreal." description="Professional growth, continuous development and a structured environment for people who want to build a career in industry." image="/images/fachada-boreal.webp" imageAlt="Boreal Plating facility in Joinville" />
+
+  <section class="section">
+    <div class="container intro-grid reveal">
+      <div><p class="eyebrow">JOIN OUR TEAM</p><h2>Developing people is part of the company's growth.</h2></div>
+      <div class="intro-copy"><p>At Boreal, we believe the company's growth goes hand in hand with the development of every person who is part of our team.</p><p>Our work environment combines structure, professional development opportunities and benefits designed to support quality of life, safety and well-being.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-ice">
+    <div class="container">
+      <div class="heading-row reveal"><div><p class="eyebrow">BENEFITS</p><h2>Structure to work, learn and grow.</h2></div><p>Benefits and initiatives currently presented by Boreal on its institutional careers page.</p></div>
+      <div class="rd-grid">
+        <article class="rd-card reveal"><span class="mark">01</span><h3>Benefits and quality of life</h3><p>Health insurance, pharmacy and gym partnerships, flu vaccination, on-site meals, free parking and a workplace stretching program.</p></article>
+        <article class="rd-card reveal"><span class="mark">02</span><h3>Development</h3><p>Boreal career development plan, free English classes during work hours, training, skills development and professional growth opportunities.</p></article>
+        <article class="rd-card reveal"><span class="mark">03</span><h3>Leisure and team building</h3><p>Employee social club, recreational area, soccer field, sand court, family leisure spaces, internal tournaments and team-building activities.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal"><p class="eyebrow">APPLICATION</p><h2>Submit your details.</h2><p>Complete the form. When submitted, your email application will open with the information provided. Attach your resume before sending the message.</p></div>
+      <div class="reveal"><CareerForm lang="en" /></div>
+    </div>
+  </section>
+</BaseLayout>

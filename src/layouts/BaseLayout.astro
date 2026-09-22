@@ -1,0 +1,86 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { languagePairs, site, type Lang } from '../data/site';
+interface Props { title: string; description: string; lang?: Lang; path: string; }
+const { title, description, lang = 'pt', path } = Astro.props;
+const canonical = new URL(path, site.url).toString();
+const altPath = languagePairs[path] || (lang === 'pt' ? '/en/' : '/');
+const organization = {
+  '@context': 'https://schema.org', '@type': ['Organization', 'LocalBusiness'],
+  name: 'Boreal Plating', url: site.url, email: site.email, telephone: site.phone,
+  address: { '@type': 'PostalAddress', streetAddress: 'Rua Tuiuti, 3835', addressLocality: 'Joinville', addressRegion: 'SC', postalCode: '89226-001', addressCountry: 'BR' },
+  sameAs: [site.instagram, site.linkedin],
+};
+---
+<!doctype html>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang === 'pt' ? 'en' : 'pt-BR'} href={new URL(altPath, site.url).toString()} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).toString()} />
+    <link rel="icon" href="/images/logo-boreal.png" type="image/png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(organization)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{lang === 'pt' ? 'Ir para o conteúdo' : 'Skip to content'}</a>
+    <Header {lang} {path} />
+    <main id="content"><slot /></main>
+    <Footer {lang} />
+    <script is:inline>
+      const header = document.querySelector('[data-header]');
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.mobile-menu');
+      const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
+      setHeader(); window.addEventListener('scroll', setHeader, { passive: true });
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        if (menu) menu.hidden = open;
+        document.body.classList.toggle('menu-open', !open);
+      });
+      document.querySelectorAll('form[data-recipient]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (!(form instanceof HTMLFormElement) || !form.reportValidity()) return;
+          const recipient = form.dataset.recipient;
+          if (!recipient) return;
+          const formLabel = form.dataset.formLabel || 'Boreal Plating website';
+          const formData = new FormData(form);
+          const lines = [];
+          for (const [name, rawValue] of formData.entries()) {
+            if (/consent/i.test(name)) continue;
+            const value = String(rawValue).trim();
+            if (!value) continue;
+            const field = form.elements.namedItem(name);
+            const label = field instanceof HTMLElement && field.id ? form.querySelector(`label[for="${field.id}"]`) : null;
+            const readableName = label?.textContent?.replace(/\s*\*\s*$/, '').trim() || name.replaceAll('_', ' ').replace(/^./, (letter) => letter.toUpperCase());
+            lines.push(`${readableName}: ${value}`);
+          }
+          const sender = formData.get('name') || formData.get('nome') || formData.get('company') || formData.get('empresa') || '';
+          const subject = `${formLabel}${sender ? ` — ${sender}` : ''}`;
+          const footer = document.documentElement.lang === 'en' ? 'Sent from the Boreal Plating website.' : 'Enviado pelo site da Boreal Plating.';
+          const body = `${lines.join('\n')}\n\n${footer}`;
+          window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+      });
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        }), { threshold: .12 });
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      } else document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+    </script>
+  </body>
+</html>

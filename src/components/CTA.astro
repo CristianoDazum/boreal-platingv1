@@ -1,0 +1,13 @@
+---
+interface Props { lang?: 'pt' | 'en'; title?: string; }
+const { lang = 'pt', title } = Astro.props;
+---
+<section class="cta-band reveal">
+  <div class="container cta-inner">
+    <div>
+      <p class="eyebrow light">{lang === 'pt' ? 'CONVERSE COM A BOREAL' : 'TALK TO BOREAL'}</p>
+      <h2>{title || (lang === 'pt' ? 'Seu projeto exige precisão, controle e capacidade industrial?' : 'Does your project require precision, control and industrial capability?')}</h2>
+    </div>
+    <a class="button button-white" href={lang === 'pt' ? '/contato/' : '/en/contact/'}>{lang === 'pt' ? 'Fale com nosso time' : 'Talk to our team'} <span>↗</span></a>
+  </div>
+</section>

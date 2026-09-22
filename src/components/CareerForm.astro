@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+interface Props { lang?: 'pt' | 'en'; }
+const { lang = 'pt' } = Astro.props;
+const t = lang === 'pt' ? {
+  name:'Nome', email:'E-mail', phone:'Telefone', area:'Área de interesse', linkedin:'LinkedIn', message:'Mensagem', legal:'Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 – LGPD), os dados pessoais informados neste formulário serão utilizados exclusivamente para fins de recrutamento e seleção pela Boreal Plating, não sendo compartilhados com terceiros para outras finalidades.', consent:'Estou ciente de que meus dados pessoais serão tratados conforme a LGPD e autorizo seu uso para o retorno desta candidatura.', submit:'Enviar candidatura', note:`Ao enviar, seu aplicativo de e-mail será aberto. Anexe o currículo antes de enviar a mensagem para ${site.hrEmail}.`, formLabel:'Candidatura - Trabalhe Conosco'
+} : {
+  name:'Name', email:'Email', phone:'Phone', area:'Area of interest', linkedin:'LinkedIn', message:'Message', legal:"In accordance with Brazil's General Data Protection Law (Lei nº 13.709/2018 – LGPD), the personal data provided in this form will be used exclusively for recruitment and selection purposes by Boreal Plating and will not be shared with third parties for other purposes.", consent:'I understand my personal data will be processed in accordance with the LGPD and I authorize its use to respond to this application.', submit:'Submit application', note:`When submitted, your email application will open. Attach your resume before sending the message to ${site.hrEmail}.`, formLabel:'Careers application'
+};
+---
+<form class="contact-form" data-recipient={site.hrEmail} data-form-label={t.formLabel}>
+  <div class="form-field"><label for={`career-name-${lang}`}>{t.name} *</label><input id={`career-name-${lang}`} name="name" autocomplete="name" required /></div>
+  <div class="form-field"><label for={`career-email-${lang}`}>{t.email} *</label><input id={`career-email-${lang}`} name="email" type="email" autocomplete="email" required /></div>
+  <div class="form-field"><label for={`career-phone-${lang}`}>{t.phone}</label><input id={`career-phone-${lang}`} name="phone" type="tel" autocomplete="tel" /></div>
+  <div class="form-field"><label for={`career-area-${lang}`}>{t.area}</label><input id={`career-area-${lang}`} name="area" /></div>
+  <div class="form-field full"><label for={`career-linkedin-${lang}`}>{t.linkedin}</label><input id={`career-linkedin-${lang}`} name="linkedin" type="url" placeholder="https://www.linkedin.com/in/..." /></div>
+  <div class="form-field full"><label for={`career-message-${lang}`}>{t.message}</label><textarea id={`career-message-${lang}`} name="message"></textarea></div>
+  <p class="form-note form-legal">{t.legal}</p>
+  <label class="consent"><input type="checkbox" name="consent" required /><span>{t.consent} *</span></label>
+  <div class="form-field full"><button class="button" type="submit">{t.submit} <span>↗</span></button></div>
+  <p class="form-note">{t.note}</p>
+</form>

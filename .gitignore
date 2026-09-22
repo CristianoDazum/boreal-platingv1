@@ -1,0 +1,5 @@
+node_modules/
+.astro/
+vendor/
+work-test/
+*.tgz

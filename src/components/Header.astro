@@ -1,0 +1,35 @@
+---
+import { nav, languagePairs, site, type Lang } from '../data/site';
+interface Props { lang: Lang; path: string; }
+const { lang, path } = Astro.props;
+const altPath = languagePairs[path] || (lang === 'pt' ? '/en/' : '/');
+---
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href={lang === 'pt' ? '/' : '/en/'} aria-label="Boreal Plating — Home">
+      <img src="/images/logo-boreal.png" width="250" height="78" alt="Boreal Plating" />
+    </a>
+    <nav class="desktop-nav" aria-label={lang === 'pt' ? 'Navegação principal' : 'Primary navigation'}>
+      {nav[lang].map(([label, href]) => <a class:list={[path === href && 'active']} href={href}>{label}</a>)}
+    </nav>
+    <div class="header-tools">
+      <a class="language" href={altPath} aria-label={lang === 'pt' ? 'View in English' : 'Ver em português'}>
+        <span class:list={[lang === 'pt' && 'selected']}>PT</span><i></i><span class:list={[lang === 'en' && 'selected']}>EN</span>
+      </a>
+      <a class="social-link" href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+      <a class="social-link" href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label={lang === 'pt' ? 'Abrir menu' : 'Open menu'}>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label={lang === 'pt' ? 'Navegação móvel' : 'Mobile navigation'}>
+      {nav[lang].map(([label, href], index) => <a href={href}><span>{String(index + 1).padStart(2, '0')}</span>{label}</a>)}
+    </nav>
+    <div class="mobile-socials">
+      <a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+  </div>
+</header>

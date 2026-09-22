@@ -1,0 +1,16 @@
+---
+interface Props { documents: string[][]; lang?: 'pt' | 'en'; }
+const { documents, lang = 'pt' } = Astro.props;
+---
+<div class="document-grid">
+  {documents.map(([title, description, href]) => (
+    <article class="document-card reveal">
+      <div class="document-icon" aria-hidden="true">PDF</div>
+      <div><h3>{title}</h3><p>{description}</p></div>
+      <div class="document-actions">
+        <a href={href} target="_blank" rel="noopener noreferrer">{lang === 'pt' ? 'Ver documento' : 'View document'} ↗</a>
+        <a href={href} download>{lang === 'pt' ? 'Baixar PDF' : 'Download PDF'} ↓</a>
+      </div>
+    </article>
+  ))}
+</div>

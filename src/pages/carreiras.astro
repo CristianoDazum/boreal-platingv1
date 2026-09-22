@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CareerForm from '../components/CareerForm.astro';
+---
+<BaseLayout title="Carreiras | Boreal Plating" description="Conheça benefícios, oportunidades de desenvolvimento e envie seus dados para trabalhar na Boreal Plating." path="/carreiras/">
+  <PageHero eyebrow="CARREIRAS" title="Trabalhe na Boreal." description="Crescimento profissional, desenvolvimento contínuo e um ambiente estruturado para quem quer construir uma trajetória na indústria." image="/images/fachada-boreal.webp" imageAlt="Fachada da Boreal Plating em Joinville" />
+
+  <section class="section">
+    <div class="container intro-grid reveal">
+      <div><p class="eyebrow">TRABALHE CONOSCO</p><h2>Desenvolvimento de pessoas faz parte do crescimento da empresa.</h2></div>
+      <div class="intro-copy"><p>Na Boreal, acreditamos que o crescimento da empresa acontece junto com o desenvolvimento de cada pessoa que faz parte do nosso time.</p><p>O ambiente de trabalho combina estrutura, oportunidades de desenvolvimento profissional e benefícios voltados à qualidade de vida, segurança e bem-estar.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-ice">
+    <div class="container">
+      <div class="heading-row reveal"><div><p class="eyebrow">BENEFÍCIOS</p><h2>Estrutura para trabalhar, aprender e evoluir.</h2></div><p>Benefícios e iniciativas atualmente apresentados pela Boreal em sua página institucional de carreiras.</p></div>
+      <div class="rd-grid">
+        <article class="rd-card reveal"><span class="mark">01</span><h3>Benefícios e qualidade de vida</h3><p>Plano de saúde, convênio com farmácias e academias, vacinação contra a gripe, alimentação na empresa, estacionamento gratuito e ginástica laboral.</p></article>
+        <article class="rd-card reveal"><span class="mark">02</span><h3>Desenvolvimento</h3><p>Plano de carreira Boreal, aulas de inglês gratuitas durante o horário de trabalho, treinamentos, capacitações e oportunidades de crescimento profissional.</p></article>
+        <article class="rd-card reveal"><span class="mark">03</span><h3>Lazer e integração</h3><p>Grêmio da empresa, área recreativa, quadra de futebol, quadra de areia, espaços de lazer para familiares, torneios internos e atividades de integração.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal"><p class="eyebrow">CANDIDATURA</p><h2>Envie seus dados.</h2><p>Preencha o formulário. Ao enviar, seu aplicativo de e-mail será aberto com as informações preenchidas. Anexe seu currículo antes de concluir o envio.</p></div>
+      <div class="reveal"><CareerForm /></div>
+    </div>
+  </section>
+</BaseLayout>

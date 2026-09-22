@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import PageHero from '../../components/PageHero.astro'; import CTA from '../../components/CTA.astro'; import { certifications } from '../../data/site';
+---
+<BaseLayout title="Certifications | Boreal Plating" description="Boreal Plating's ISO 9001:2015, AS9100:2016 and Cyber Trust Europe certifications." lang="en" path="/en/certifications/">
+  <PageHero eyebrow="CERTIFICATIONS" title="Quality supported by recognized standards." description="Active certifications support operational discipline, risk management, traceability and continual improvement." image="/images/peca-cromada.webp" imageAlt="Precision chrome-finished components" />
+  <section class="section"><div class="container intro-grid reveal"><div><p class="eyebrow">QUALITY AND COMPLIANCE</p><h2>Technical criteria embedded in everyday operations.</h2></div><div class="intro-copy"><p>Boreal maintains systems and practices assessed by independent bodies. Its certifications reflect the controls applied to manufacturing, injection molding and the treatment of metallic and plastic surfaces.</p></div></div></section>
+  <section class="section section-ice"><div class="container"><div class="cert-grid">{certifications.map((cert) => <article class="cert-card reveal"><span class="cert-standard">CURRENT CERTIFICATION</span><h3>{cert.title}</h3><p>{cert.descriptionEn}</p><div class="cert-meta">{cert.number && <>Certificate no. {cert.number} · </>}valid through {cert.validity}</div><div class="document-actions"><a href={cert.href} target="_blank" rel="noopener noreferrer">View certificate ↗</a><a href={cert.href} download>Download PDF ↓</a></div></article>)}</div></div></section><CTA lang="en" />
+</BaseLayout>

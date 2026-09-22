@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+interface Props { lang?: 'pt' | 'en'; }
+const { lang = 'pt' } = Astro.props;
+const t = lang === 'pt' ? {
+  company:'Nome da empresa', taxId:'CNPJ', contact:'Nome do responsável', email:'E-mail', phone:'Telefone', category:'Categoria de fornecimento', select:'Selecione uma categoria', categories:['Matéria-prima','Insumos químicos','Usinagem e componentes','Serviços técnicos','Logística','Outros'], message:'Mensagem', consent:'Autorizo o uso dos dados informados para o retorno deste cadastro.', submit:'Enviar cadastro', note:`Ao enviar, seu aplicativo de e-mail será aberto. Anexe documentos antes de enviar a mensagem para ${site.email}.`, formLabel:'Cadastro de fornecedor'
+} : {
+  company:'Company name', taxId:'Tax ID / Company registration', contact:'Contact name', email:'Email', phone:'Phone', category:'Supply category', select:'Select a category', categories:['Raw materials','Chemical supplies','Machining and components','Technical services','Logistics','Other'], message:'Message', consent:'I authorize the use of the information provided to respond to this registration.', submit:'Submit registration', note:`When submitted, your email application will open. Attach any documents before sending the message to ${site.email}.`, formLabel:'Supplier registration'
+};
+---
+<form class="contact-form" data-recipient={site.email} data-form-label={t.formLabel}>
+  <div class="form-field"><label for={`supplier-company-${lang}`}>{t.company} *</label><input id={`supplier-company-${lang}`} name="company" autocomplete="organization" required /></div>
+  <div class="form-field"><label for={`supplier-tax-${lang}`}>{t.taxId} *</label><input id={`supplier-tax-${lang}`} name="tax_id" required /></div>
+  <div class="form-field"><label for={`supplier-contact-${lang}`}>{t.contact} *</label><input id={`supplier-contact-${lang}`} name="contact_name" autocomplete="name" required /></div>
+  <div class="form-field"><label for={`supplier-email-${lang}`}>{t.email} *</label><input id={`supplier-email-${lang}`} name="email" type="email" autocomplete="email" required /></div>
+  <div class="form-field"><label for={`supplier-phone-${lang}`}>{t.phone}</label><input id={`supplier-phone-${lang}`} name="phone" type="tel" autocomplete="tel" /></div>
+  <div class="form-field"><label for={`supplier-category-${lang}`}>{t.category}</label><select id={`supplier-category-${lang}`} name="category"><option value="">{t.select}</option>{t.categories.map((category) => <option value={category}>{category}</option>)}</select></div>
+  <div class="form-field full"><label for={`supplier-message-${lang}`}>{t.message}</label><textarea id={`supplier-message-${lang}`} name="message"></textarea></div>
+  <label class="consent"><input type="checkbox" name="consent" required /><span>{t.consent} *</span></label>
+  <div class="form-field full"><button class="button" type="submit">{t.submit} <span>↗</span></button></div>
+  <p class="form-note">{t.note}</p>
+</form>

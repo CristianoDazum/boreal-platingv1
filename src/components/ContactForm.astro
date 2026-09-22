@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+interface Props { lang?: 'pt' | 'en'; }
+const { lang = 'pt' } = Astro.props;
+const t = lang === 'pt' ? {
+  name:'Nome', company:'Empresa', role:'Cargo', email:'E-mail', phone:'Telefone', subject:'Assunto', message:'Mensagem', consent:'Autorizo o uso dos dados informados exclusivamente para o retorno desta solicitação.', submit:'Enviar mensagem', note:`Ao enviar, seu aplicativo de e-mail será aberto com a mensagem preparada para ${site.commercialEmail}.`, formLabel:'Contato comercial'
+} : {
+  name:'Name', company:'Company', role:'Role', email:'Email', phone:'Phone', subject:'Subject', message:'Message', consent:'I authorize the use of the information provided exclusively to respond to this request.', submit:'Send message', note:`When submitted, your email application will open with a message prepared for ${site.commercialEmail}.`, formLabel:'Sales contact'
+};
+---
+<form class="contact-form" data-recipient={site.commercialEmail} data-form-label={t.formLabel}>
+  <div class="form-field"><label for={`name-${lang}`}>{t.name} *</label><input id={`name-${lang}`} name="name" autocomplete="name" required /></div>
+  <div class="form-field"><label for={`company-${lang}`}>{t.company}</label><input id={`company-${lang}`} name="company" autocomplete="organization" /></div>
+  <div class="form-field"><label for={`role-${lang}`}>{t.role}</label><input id={`role-${lang}`} name="role" autocomplete="organization-title" /></div>
+  <div class="form-field"><label for={`email-${lang}`}>{t.email} *</label><input id={`email-${lang}`} name="email" type="email" autocomplete="email" required /></div>
+  <div class="form-field"><label for={`phone-${lang}`}>{t.phone}</label><input id={`phone-${lang}`} name="phone" type="tel" autocomplete="tel" /></div>
+  <div class="form-field"><label for={`subject-${lang}`}>{t.subject}</label><input id={`subject-${lang}`} name="subject" /></div>
+  <div class="form-field full"><label for={`message-${lang}`}>{t.message} *</label><textarea id={`message-${lang}`} name="message" required></textarea></div>
+  <label class="consent"><input type="checkbox" name="consent" required /><span>{t.consent} *</span></label>
+  <div class="form-field full"><button class="button" type="submit">{t.submit} <span>↗</span></button></div>
+  <p class="form-note">{t.note}</p>
+</form>

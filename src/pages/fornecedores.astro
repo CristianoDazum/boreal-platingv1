@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SupplierForm from '../components/SupplierForm.astro';
+---
+<BaseLayout title="Fornecedores | Boreal Plating" description="Cadastro de fornecedores da Boreal Plating para matérias-primas, insumos, usinagem, componentes, serviços técnicos e logística." path="/fornecedores/">
+  <PageHero eyebrow="FORNECEDORES" title="Parcerias que fortalecem a operação." description="Cadastre sua empresa para apresentar produtos, serviços e capacidades de fornecimento à Boreal Plating." image="/images/materia-prima.webp" imageAlt="Materiais e componentes utilizados na operação industrial da Boreal" />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">SEJA UM FORNECEDOR</p>
+        <h2>Cadastre sua empresa.</h2>
+        <p>O cadastro reúne informações essenciais para que a Boreal conheça sua empresa, categoria de fornecimento e possibilidades de parceria.</p>
+        <div class="contact-list">
+          <div class="contact-item"><span>Categorias</span><p>Matéria-prima, insumos químicos, usinagem e componentes, serviços técnicos, logística e outros fornecimentos.</p></div>
+          <div class="contact-item"><span>Ética e conduta</span><p>As relações com fornecedores e parceiros seguem o <a class="text-link" href="/documents/esg/codigo-de-etica-e-conduta.pdf" target="_blank" rel="noopener noreferrer">Código de Ética e Conduta ↗</a> da Boreal.</p></div>
+        </div>
+      </div>
+      <div class="reveal"><SupplierForm /></div>
+    </div>
+  </section>
+</BaseLayout>
